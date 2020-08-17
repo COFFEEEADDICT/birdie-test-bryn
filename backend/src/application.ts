@@ -1,11 +1,19 @@
 import * as express from "express";
 import * as cors from 'cors';
 
-import {pingController} from "./controllers/ping";
+import {eventsController} from "./controllers/events";
 
 const app = express();
 
 app.use(cors())
-app.use(pingController);
+app.use(eventsController);
+ 
+
+// //Get anything else - throw error
+// app.get('*', (_, res) => {
+//   res.status(404).send('Nothing here 🤔')
+// })
+
+
 
 export default app;
