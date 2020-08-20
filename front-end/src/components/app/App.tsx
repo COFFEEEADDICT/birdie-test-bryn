@@ -1,53 +1,34 @@
 import * as React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import { RootState } from '@App/store/reducers';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import  styled, { createGlobalStyle } from 'styled-components';
 
-interface AppProps {
-}
-
-interface AppState {
-}
+import { SideNavContainer } from '../container/SideNavContainer';
+import { MainContainer } from '../container/MainContainer';
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    height: 100vh;
-    background-color: #F9F9F9;
-    > div {
-      height: 100%;
-    }
+  body { 
+    background-color: #e8e9eb;
+    overflow: hidden;
+    font-family: Circular Std Book;
   }
 `;
 
 const AppContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 `;
 
-class App extends React.Component<AppProps, AppState> {
-  public constructor(props: AppProps) {
-    super(props);
-  }
-
-  public render() {
+const App: React.FunctionComponent = () => { 
     return (
       <>
         <GlobalStyle />
-        <AppContainer>
-          {'hi'}
-        </AppContainer>
+          <AppContainer >
+            <SideNavContainer />
+            <MainContainer />
+          </AppContainer >
       </>
     );
-  }
-}
+};
 
-const mapStateToProps = (state: RootState, ownProps: object) => {};
-
-const mapDispatchToProps = (dispatch: Dispatch<RootState>) => {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

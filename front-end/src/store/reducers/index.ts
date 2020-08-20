@@ -1,5 +1,14 @@
 import { combineReducers } from 'redux';
+import { navigationReducer } from './navigationReducer';
 
-export type RootState = Readonly<{}>;
+export type RootState = Readonly<{
+    sideNav: SideNavSate;
+}>;
 
-export const rootReducer = combineReducers<RootState>({});
+export interface SideNavSate {
+    monitorPageFlag: boolean; 
+}
+
+export const rootReducer = combineReducers<RootState>({ 
+    sideNav: navigationReducer,
+});
