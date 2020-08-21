@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
  
 import { monitorPageFlagAction } from '../../store/actions';
 import { RootState } from '@App/store/reducers';
-import { AppActions } from '@App/store/types/sideNavigationTypes';
+import { AppActions } from '@App/store/types';
  
 const LogoUrl = require('../../assets/images/logo-birdie.svg');
 

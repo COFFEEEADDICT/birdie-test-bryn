@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import DateSelector from '../UI/DateSelector';
-import PatientSelector from '../UI/PatientSelector';
+import { PatientSelector } from '../UI/PatientSelector';
 //   grid-template-columns: repeat(4);
 // display: grid;
 const StyledMainMonitorDiv = styled.div`

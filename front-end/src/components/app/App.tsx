@@ -3,6 +3,9 @@ import  styled, { createGlobalStyle } from 'styled-components';
 
 import { SideNavContainer } from '../container/SideNavContainer';
 import { MainContainer } from '../container/MainContainer';
+import { useDispatch } from 'react-redux';
+// import axios from 'axios';
+import { GET_CARE_RECIPIENTS } from '@App/store/types/userDataTypes';
 
 const GlobalStyle = createGlobalStyle`
   body { 
@@ -20,15 +23,33 @@ const AppContainer = styled.div`
 `;
 
 const App: React.FunctionComponent = () => { 
-    return (
-      <>
-        <GlobalStyle />
-          <AppContainer >
-            <SideNavContainer />
-            <MainContainer />
-          </AppContainer >
-      </>
-    );
+  const [onLoad] = React.useState();
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    async function fetchPatientList() {
+      const request = await fetch('http://localhost:8000/recevingcare')
+      .then(res => res.json())
+      .then(resp => resp);
+      return dispatch( 
+        { type: GET_CARE_RECIPIENTS,
+          payload: request
+        }
+      );
+    }
+    fetchPatientList();
+    console.log('worked');
+  },  [onLoad]);
+
+  return (
+    <>
+      <GlobalStyle />
+        <AppContainer >
+          <SideNavContainer />
+          <MainContainer />
+        </AppContainer >
+    </>
+  );
 };
 
 export default App;

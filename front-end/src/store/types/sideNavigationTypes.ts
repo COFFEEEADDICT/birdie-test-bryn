@@ -5,6 +5,3 @@ export interface SetMonitorPageFlag {
 }
 
 export type SideNavigationTypes = SetMonitorPageFlag;
-
-// If we had more nav actions
-export type AppActions = SideNavigationTypes;

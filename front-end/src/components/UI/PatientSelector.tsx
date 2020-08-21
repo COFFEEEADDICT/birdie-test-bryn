@@ -4,8 +4,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import * as React from 'react';
 
+import { connect, MapStateToPropsParam } from 'react-redux';
+import { RootState } from '@App/store/reducers';
+ 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
@@ -18,20 +20,30 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PatientSelector() {
-  const classes = useStyles();
-  const [age, setAge] = React.useState('');
+type PatientProps  = {
+  userPatientList: string[]
+}; 
 
+const PatientComponent: React.FunctionComponent<PatientProps> = ({userPatientList}: PatientProps) => {
+  const classes = useStyles();
+  
+  const [patientSelected, setPatient] = React.useState('');
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setAge(event.target.value as string);
+    setPatient(event.target.value as string);
   };
 
-  React.useEffect(() => {
-    async function fetchPatientList() {
-     const request = await 
-    }
-    fetchPatientList()
-  }, [null])
+  // let userPatientList: string[]
+  // userPatientList = useSelector<RootState>(state => state.userData.careRecipients) => string[];
+  // console.log(userPatientList);
+
+  // React.useEffect(() => {
+  //     async function fetchPatientList() {
+  //       const request = await axios('http://localhost:8000/recevingcare');
+  //       console.log(request);
+  //       return request;
+  //     }
+  //     fetchPatientList();
+  // },  []);
 
   return (
     <div>
@@ -40,15 +52,19 @@ export default function PatientSelector() {
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={age}
+          value={patientSelected}
           onChange={handleChange}
           label="PatientSelector"
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {userPatientList.map((each: string) => {return <MenuItem key={each} value={each} >{each}</MenuItem>; } )}
         </Select>
       </FormControl>
     </div>
   );
-}
+};
+
+const mapStateToProps: MapStateToPropsParam<PatientProps, {}, RootState> = (state) => ({
+  userPatientList: state.userData.careRecipients
+});
+
+export const PatientSelector = connect<PatientProps, {}, {}, RootState>(mapStateToProps)(PatientComponent); 
