@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import DateSelector from '../UI/DateSelector';
+import { DateSelector } from '../UI/DateSelector';
 import { PatientSelector } from '../UI/PatientSelector';
+import { TimelineUI } from '../UI/TimelineUI';
 //   grid-template-columns: repeat(4);
 // display: grid;
 const StyledMainMonitorDiv = styled.div`
@@ -49,9 +50,11 @@ const RightSection = styled.div`
     background: dodgerblue;
     height: 70vh;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
+    overflow: auto;
+    max-height: 100%;
 `;
-
+// overflow: hidden;
 const MonitorContainer = () => {
     return (
         <>
@@ -68,8 +71,10 @@ const MonitorContainer = () => {
             </ LeftSide>
 
             <RightSide >
-                <RightSection>
-                    {'#Right content in here'}
+                <RightSection> 
+                     {/* < div style={{ height: '10000px' }}> */}
+                      <TimelineUI />
+                     {/* </ div> */}
                 </RightSection>
             </ RightSide>
 
@@ -79,24 +84,3 @@ const MonitorContainer = () => {
 };
 
 export default MonitorContainer;
-
-// const TopLeftSection = styled.div` 
-//     grid-row: 1 / 5;
-//     grid-column: 1 / 3;
-//     background: red;
-// `;
-
-// const BottomLeftSection = styled.div` 
-//     grid-row: 5/ 3;
-//     grid-column: 1 / 3;
-//     background: greenyellow;
-     
-//     justify-content: center;
-//     display: flex;
-// `;
-
-// const RightSection = styled.div` 
-//     grid-row: 1 / 5;
-//     grid-column: 2 / 4;
-//     background: dodgerblue;
-// `;

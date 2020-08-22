@@ -7,6 +7,9 @@ import Select from '@material-ui/core/Select';
 
 import { connect, MapStateToPropsParam } from 'react-redux';
 import { RootState } from '@App/store/reducers';
+import { AppActions } from '@App/store/types';
+// import { handleSelectedPatientID } from '@App/store/actions';
+import { SET_PATIENT_ID, SetPatientID } from '@App/store/types/userDataTypes';
  
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,29 +24,23 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type PatientProps  = {
-  userPatientList: string[]
+  userPatientList: string[];
+  patientIdSelected: string | unknown;
 }; 
 
-const PatientComponent: React.FunctionComponent<PatientProps> = ({userPatientList}: PatientProps) => {
+const PatientComponent: React.FunctionComponent<PatientProps> = 
+({userPatientList, patientIdSelected}: PatientProps) => {
   const classes = useStyles();
   
   const [patientSelected, setPatient] = React.useState('');
+  
+  console.log(patientSelected, patientIdSelected);
+
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setPatient(event.target.value as string);
   };
 
-  // let userPatientList: string[]
-  // userPatientList = useSelector<RootState>(state => state.userData.careRecipients) => string[];
-  // console.log(userPatientList);
-
-  // React.useEffect(() => {
-  //     async function fetchPatientList() {
-  //       const request = await axios('http://localhost:8000/recevingcare');
-  //       console.log(request);
-  //       return request;
-  //     }
-  //     fetchPatientList();
-  // },  []);
+  // handleSelectedPatientID(patientSelected);
 
   return (
     <div>
@@ -51,7 +48,7 @@ const PatientComponent: React.FunctionComponent<PatientProps> = ({userPatientLis
         <InputLabel id="demo-simple-select-outlined-label">Pick a patient here</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
+          id="id-select"
           value={patientSelected}
           onChange={handleChange}
           label="PatientSelector"
@@ -64,7 +61,21 @@ const PatientComponent: React.FunctionComponent<PatientProps> = ({userPatientLis
 };
 
 const mapStateToProps: MapStateToPropsParam<PatientProps, {}, RootState> = (state) => ({
-  userPatientList: state.userData.careRecipients
+  userPatientList: state.userData.careRecipients,
+  patientIdSelected: state.userData.patientIdSelected
 });
 
-export const PatientSelector = connect<PatientProps, {}, {}, RootState>(mapStateToProps)(PatientComponent); 
+const mapDispatchToProps = (dispatch: React.Dispatch<AppActions>) => {
+  return {
+    handleSelectedPatientID: (selectedId: string) => { 
+      const selected: SetPatientID = {
+        type: SET_PATIENT_ID,
+        payload: selectedId,
+      };
+		    dispatch(selected);
+		},
+	};
+};
+ 
+export const PatientSelector = connect<PatientProps, {},
+ {}, RootState>(mapStateToProps, mapDispatchToProps)(PatientComponent); 
