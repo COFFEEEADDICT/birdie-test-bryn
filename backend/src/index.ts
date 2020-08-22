@@ -4,5 +4,7 @@ const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   // tslint:disable-next-line:no-console
-  console.log(`** Bryn's Birdie API at http://localhost:${port} **`);
+  console.log(``);
+  console.log(`*************************************************`);
+  console.log(`**  Bryn's Birdie API at http://localhost:${port} **`);
 });
