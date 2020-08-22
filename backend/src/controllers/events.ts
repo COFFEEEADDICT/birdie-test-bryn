@@ -45,14 +45,13 @@ connection.connect((err: any) =>{
 
 // care_recipient_id
 
-  
-eventsController.get('/receving_care', (_,res) => { 
-  connection.query('SELECT distinct care_recipient_id FROM events', async(err, results) => {
+// 1. //
+eventsController.get('/recevingcare', (_,res) => { 
+  connection.query('SELECT distinct care_recipient_id FROM events', async (err, results) => {
    if (err) {
      return res.send(err)
-   } else {
-    console.log(results)
-    //format for the front end
+   } else { 
+    //Format for the front end
     const receving_care_list = await results.map((each: any) => each.care_recipient_id)
     return res.status(200).send(receving_care_list);
    }
