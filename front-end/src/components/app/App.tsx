@@ -4,7 +4,7 @@ import  styled, { createGlobalStyle } from 'styled-components';
 import { SideNavContainer } from '../container/SideNavContainer';
 import { MainContainer } from '../container/MainContainer';
 import { useDispatch } from 'react-redux';
-// import axios from 'axios';
+
 import { GET_CARE_RECIPIENTS } from '@App/store/types/userDataTypes';
 
 const GlobalStyle = createGlobalStyle`
@@ -31,7 +31,6 @@ const App: React.FunctionComponent = () => {
       const request = await fetch('http://localhost:8000/recevingcare')
       .then(res => res.json())
       .then(resp => resp);
-      console.log(request);
       return dispatch( 
         { type: GET_CARE_RECIPIENTS,
           payload: request
@@ -39,7 +38,6 @@ const App: React.FunctionComponent = () => {
       );
     }
     fetchPatientList();
-    console.log('APP STARTED');
   },  [onLoad]);
 
   return (

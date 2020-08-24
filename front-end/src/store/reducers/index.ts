@@ -14,7 +14,8 @@ export interface SideNavSate {
 export interface UserDataState {
     careRecipients: string[];
     patientList: [];
-    patientIdSelected: string | null | unknown;
+    patientIdSelected: string | null;
+    dateSelected: string | null;
 }
 
 export const rootReducer = combineReducers<RootState>({ 

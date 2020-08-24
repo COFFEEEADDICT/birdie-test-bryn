@@ -11,12 +11,11 @@ const StyledMainFrameTrue = {
 };
 
 const StyledMainFrameFalse = {
-    transform: 'translate(26%, 10%)',
-    padding: '10px',
+    transform: 'translate(24%, 8%)',
 };
 
 type MainProps = {
-    monitorPageFlag: boolean
+    monitorPageFlag: boolean;
 };
 
 const MainContainerPlain: React.FunctionComponent<MainProps> = ({monitorPageFlag}: MainProps) => { 
@@ -28,11 +27,8 @@ const MainContainerPlain: React.FunctionComponent<MainProps> = ({monitorPageFlag
     );
 };
 
-// swtich through nav parts
 const mapStateToProps: MapStateToPropsParam<MainProps, {}, RootState> = (state) => ({
     monitorPageFlag: state.sideNav.monitorPageFlag
 });
 
-export const MainContainer = connect<MainProps, {}, {}, RootState>(mapStateToProps)(MainContainerPlain); 
-
-{/* <MainContainer /> */}
+export const MainContainer = connect<MainProps, {}, {}, RootState>(mapStateToProps)(MainContainerPlain);

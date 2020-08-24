@@ -55,14 +55,5 @@ const mapDispatchToProps = (dispatch: React.Dispatch<AppActions>) => ({
         handleClickFlag: () => dispatch(monitorPageFlagAction()),
 });
 
-// export default connect( null, {monitorPageFlagAction: monitorPageFlagAction} )
-// ( SideNavContainerFixed );// as React.ComponentClass<{}>;
-
-// const mapStateToProps: MapStateToPropsParam<SideNavProps, {}, RootState> = (state) => ({
-//     monitorPageFlag: state.sideNav.monitorPageFlag
-// });
-
 export const SideNavContainer = connect<SideNavProps, {},
-{}, RootState>(null, mapDispatchToProps)(SideNavContainerFixed); 
-
-{/* <SideNavContainer /> */}
+ {}, RootState>(null, mapDispatchToProps)(SideNavContainerFixed);

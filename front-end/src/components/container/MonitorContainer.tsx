@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import { DateSelector } from '../UI/DateSelector';
 import { PatientSelector } from '../UI/PatientSelector';
 import { TimelineUI } from '../UI/TimelineUI';
-//   grid-template-columns: repeat(4);
-// display: grid;
+
+// font #00254d
+// bg #54c5c1
+
 const StyledMainMonitorDiv = styled.div`
+    color: #00254d;
     display: flex;
     flex-direction: row;
     flex: 1;
@@ -17,21 +20,21 @@ const StyledMainMonitorDiv = styled.div`
     border-radius: 30px;
 `;
 
-const LeftSide = styled.div` 
-    flex: 0.3;
+const LeftSide = styled.div`
+    flex: 0.2;
     align-items: center;
     justify-content: center; 
 `;
 
-const RightSide = styled.div` 
-    flex: 0.7;
+const RightSide = styled.div`
+    flex: 0.8;
     align-items: center;
     justify-content: center; 
 `;
 
 const TopLeftSection = styled.div`
     display: flex;
-    background: #e8e9eb;
+    background: #54c5c1;
     height: 35vh; 
     align-items: center;
     justify-content: center; 
@@ -39,22 +42,23 @@ const TopLeftSection = styled.div`
 
 const BottomLeftSection = styled.div`
     display: flex;
-    background: #e8e9eb;
+    background: #54c5c1;
     height: 35vh;
     align-items: center;
     justify-content: center; 
 `;
 
 const RightSection = styled.div` 
+    color: #00254d;
     display: flex;
-    background: dodgerblue;
+    background: #54c5c1;
     height: 70vh;
     align-items: center;
     justify-content: center;
     overflow: auto;
     max-height: 100%;
-`;
-// overflow: hidden;
+`; // could add overflow: hidden
+     
 const MonitorContainer = () => {
     return (
         <>
@@ -72,9 +76,7 @@ const MonitorContainer = () => {
 
             <RightSide >
                 <RightSection> 
-                     {/* < div style={{ height: '10000px' }}> */}
                       <TimelineUI />
-                     {/* </ div> */}
                 </RightSection>
             </ RightSide>
 

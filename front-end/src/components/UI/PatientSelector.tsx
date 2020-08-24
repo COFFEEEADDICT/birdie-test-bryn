@@ -5,11 +5,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import { connect, MapStateToPropsParam } from 'react-redux';
+import { connect, MapStateToPropsParam, useDispatch } from 'react-redux';
 import { RootState } from '@App/store/reducers';
-import { AppActions } from '@App/store/types';
-// import { handleSelectedPatientID } from '@App/store/actions';
-import { SET_PATIENT_ID, SetPatientID } from '@App/store/types/userDataTypes';
+import { SET_PATIENT_ID } from '@App/store/types/userDataTypes';
  
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,27 +23,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type PatientProps  = {
   userPatientList: string[];
-  patientIdSelected: string | unknown;
 }; 
 
-const PatientComponent: React.FunctionComponent<PatientProps> = 
-({userPatientList, patientIdSelected}: PatientProps) => {
+const PatientComponent: React.FunctionComponent<PatientProps> = ({userPatientList}: PatientProps) => {
   const classes = useStyles();
-  
+  const dispatch = useDispatch();
   const [patientSelected, setPatient] = React.useState('');
   
-  console.log(patientSelected, patientIdSelected);
-
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setPatient(event.target.value as string);
+    dispatch( {type: SET_PATIENT_ID, payload: event.target.value as string });
   };
-
-  // handleSelectedPatientID(patientSelected);
 
   return (
     <div>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Pick a patient here</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">Pick a Caree here</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="id-select"
@@ -61,21 +54,20 @@ const PatientComponent: React.FunctionComponent<PatientProps> =
 };
 
 const mapStateToProps: MapStateToPropsParam<PatientProps, {}, RootState> = (state) => ({
-  userPatientList: state.userData.careRecipients,
-  patientIdSelected: state.userData.patientIdSelected
+  userPatientList: state.userData.careRecipients
 });
 
-const mapDispatchToProps = (dispatch: React.Dispatch<AppActions>) => {
-  return {
-    handleSelectedPatientID: (selectedId: string) => { 
-      const selected: SetPatientID = {
-        type: SET_PATIENT_ID,
-        payload: selectedId,
-      };
-		    dispatch(selected);
-		},
-	};
-};
+// const mapDispatchToProps = (dispatch: React.Dispatch<AppActions>) => {
+//   return {
+//     handleSelectedPatientID: (selectedId: string) => { 
+//       const selected: SetPatientID = {
+//         type: SET_PATIENT_ID,
+//         payload: selectedId,
+//       };
+// 		    dispatch(selected);
+// 		},
+// 	};
+// };
  
 export const PatientSelector = connect<PatientProps, {},
- {}, RootState>(mapStateToProps, mapDispatchToProps)(PatientComponent); 
+ {}, RootState>(mapStateToProps)(PatientComponent); 

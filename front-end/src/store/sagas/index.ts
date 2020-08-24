@@ -1,23 +1,23 @@
-function* initSaga() {
-  yield [];
-}  
+import { RootState } from '@App/store/reducers';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 
-export default initSaga;
+import { fetchTimeLine } from '../../components/API';
+import { REQUEST_API_DATA_TIMELINE } from '../types/userDataTypes';
+import { storeApiTimeLine } from '../actions';
 
-// const apiCall = async ( ) => {
-//     const request = await fetch('http://localhost:8000/recevingcare')
-//     .then(res => res.json())
-//     .then(resp => resp);
-    
-//   } 
+function* getApiData() {
+  try {
+    const patientIdSelected = yield select((state: RootState) => state.userData.patientIdSelected);
+    const dateSelected = yield select((state: RootState) =>  state.userData.dateSelected);
+    const url = `${patientIdSelected}/${dateSelected}`;
+     
+    const data = yield call(fetchTimeLine, url);
+    yield put(storeApiTimeLine(data));
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-// function* fetchData(action) {
-//   try {
-//      const user = yield call(apiCall, action.payload.userId );
-//      yield put({type: "USER_FETCH_SUCCEEDED", user: user});
-//   } catch (e) {
-//      yield put({type: "USER_FETCH_FAILED", message: e.message});
-//   }
-// }
-
-// http://localhost:8000/recevingcare/ df50cac5-293c-490d-a06c-ee26796f850d/2019-05-02
+export default function* mySaga() {
+  yield takeLatest(REQUEST_API_DATA_TIMELINE, getApiData);
+}

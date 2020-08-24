@@ -14,14 +14,17 @@
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "test": "jest --watch",
     "test:watch": "jest --watch",
-    "dev": "nodemon --watch"
+    "dev": "nodemon --watch",
+    "start": "nodemon"
   },
   "dependencies": {
     "@types/cors": "^2.8.7",
     "@types/mocha": "^8.0.2",
     "@types/mysql": "^2.15.15",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
+    "moment": "^2.27.0",
     "mysql": "^2.18.1"
   },
   "devDependencies": {

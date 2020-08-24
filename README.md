@@ -96,3 +96,12 @@ Here's the technical stack this boilerplate was made with:
    ```
    npm start
    ```
+# Test
+1. Pick the ID df50cac5- & Date 05-02-2019 (Good example)
+
+# FUTURE IMPROVEMENTS
+1. Throttle/debounce selectors maybe...
+2. UI look + animations
+3. More error handling / UI errors
+4. DRY / Separate more files & folders
+5. Add more tests + fix Enzyme
